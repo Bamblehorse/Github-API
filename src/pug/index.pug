@@ -1,0 +1,21 @@
+doctype html
+html(lang="en" ng-app="GitHub-API")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    title= "GitHub API"
+    script(src="https://use.fontawesome.com/fd06acc1a7.js")
+    link(rel="stylesheet" href="css/style.css")
+    script(src="js/angular.min.js")
+    script(src="js/app.js")
+
+  body(ng-controller="MainCtrl")
+    header
+        h1 Github Repository Checker
+        i(class="fa fa-github fa-4x")
+        h2 Repositories: {{data[0].length}}
+    article(ng-repeat="repo in data[0] | orderBy: 'created_at'" ng-class-odd="'odd'" ng-class-even="'even'")
+        h2 {{repo.name}} - {{repo.created_at | date}}
+        h3(class="fa fa-times-circle-o" ng-hide="repo.description")  No Description
+        h3(class="fa fa-check-circle-o" ng-show="repo.description")  Description: {{repo.description}}
+        h3 {{repo.language}}
